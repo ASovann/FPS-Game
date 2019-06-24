@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class playerWeapon : MonoBehaviour
+[System.Serializable]
+public class playerWeapon 
 {
-    public string name = "Laser Gun";
+    public string gunName = "Laser Gun";
+    public float damage = 10f;
+    public float range = 100f;
 
 }

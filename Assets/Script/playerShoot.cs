@@ -10,6 +10,9 @@ public class playerShoot : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
+    [SerializeField]
+    private LayerMask mask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,20 @@ public class playerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
         
+    }
+
+    void Shoot()
+    {
+        RaycastHit _hit;
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
+        {
+            Debug.Log("objet touché: " + _hit.collider.name);
+        }
+
     }
 }
