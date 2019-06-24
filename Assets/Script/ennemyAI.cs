@@ -1,0 +1,171 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ennemyAI : MonoBehaviour
+{
+
+    //Distance entre le joueur et l'ennemi
+    private float Distance;
+    
+    
+
+    //Distance entre la position de base et l'ennemi
+    private float DistanceBase;
+    public float attackRange;
+    private Vector3 basePosition;
+    
+    private int nbrAttack;
+
+    //cible ennemy
+    public Transform Target;
+
+    // distance de poursuite
+    public float chaseRange = 10;
+
+
+    //cooldown attaque
+    private float attackRepeatTime;
+    public float attackTime;
+    
+
+    //dégats infligés
+    public float TheDamage;
+
+    //agent de navigation
+    private UnityEngine.AI.NavMeshAgent agent;
+    
+
+    //vie
+    private float maxEnemyHealth;
+    public float ennemyHealth;
+    public bool isDead = false;
+    
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        agent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
+        attackRepeatTime = attackTime;
+        basePosition = transform.position;
+        maxEnemyHealth = ennemyHealth;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!isDead)
+        {
+            //recherche du joueur
+
+
+            //calcul de la distance joueur ennemi 
+            Distance = Vector3.Distance(Target.position, transform.position);
+
+            //calcul de la distance base ennemi 
+            DistanceBase = Vector3.Distance(basePosition, transform.position);
+
+            //ennemi éloigné
+            if (Distance > chaseRange && DistanceBase <= 1)
+            {
+                idle();
+
+            }
+
+            //ennemi proche mais pas a portée 
+            if (Distance < chaseRange && Distance > attackRange)
+            {
+                chase();
+
+            }
+
+            //ennemi proche a portée
+            if (Distance < attackRange)
+            {
+                
+                attack();
+
+            }
+
+            //joueur échappé
+            if (Distance > chaseRange && DistanceBase > 1 )
+            {
+                BackBase();
+            }
+        }
+        
+
+    }
+
+    //poursuite
+    void chase()
+    {
+        agent.destination = Target.position;
+    }
+
+    //attaque
+    void attack()
+    {
+        //ne traverse pas le joueur
+        agent.destination = transform.position;
+        switch (nbrAttack)
+        {
+            case 0:
+                
+                //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
+                nbrAttack++;
+                break;
+            default:
+                attackRepeatTime -= Time.deltaTime;
+                if (attackRepeatTime <= 0)
+                {
+                    //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
+                    attackRepeatTime = attackTime;
+                    nbrAttack++;
+                }
+                break;
+        }
+        
+    }
+    
+    //idle
+    void idle()
+    {
+        nbrAttack = 0;
+
+    }
+
+    //subit des dégats
+    public void ApplyDamage(float TheDamage)
+    {
+        if (!isDead)
+        {
+            ennemyHealth = ennemyHealth - TheDamage;
+
+            print(gameObject.name + "à subit " + TheDamage + " points de dégats");
+
+            
+            if (ennemyHealth <= 0 && isDead == false)
+            {
+                Dead();
+            }
+        }
+    }
+    public void BackBase()
+    {
+        
+        nbrAttack = 0;
+        agent.destination = basePosition;
+    }
+    public void Dead()
+    {
+        agent.destination = transform.position;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        isDead = true;
+        
+    } 
+  
+
+}

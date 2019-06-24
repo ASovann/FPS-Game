@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(playerMotor))]
 public class playerController : MonoBehaviour
 {
+    public float playerHealth;
+    public float playerEnergy;
+
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
@@ -40,5 +43,7 @@ public class playerController : MonoBehaviour
         float _xRot = Input.GetAxisRaw("Mouse Y");
         float _cameraRotationX = _xRot * sensitivity;
         motor.rotateCamera(_cameraRotationX);
+
+
     } 
 }

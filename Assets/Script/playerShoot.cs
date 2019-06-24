@@ -6,6 +6,7 @@ public class playerShoot : MonoBehaviour
 {
     public playerWeapon weapon;
 
+    public ennemyAI ennemy;
 
     [SerializeField]
     private Camera cam;
@@ -38,8 +39,10 @@ public class playerShoot : MonoBehaviour
         RaycastHit _hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
         {
-            Debug.Log("objet touché: " + _hit.collider.name);
+            
+            Debug.Log("objet: " + _hit.collider.name);
         }
+        
 
     }
 }
