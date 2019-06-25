@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerShoot : MonoBehaviour
 {
+    
     public playerWeapon weapon;
 
     public ennemyAI ennemy;
@@ -19,6 +20,7 @@ public class playerShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         if(cam == null)
         {
             Debug.LogError("Pas de camera renforcé");
@@ -35,6 +37,7 @@ public class playerShoot : MonoBehaviour
 
     void Shoot()
     {
+        
         //RaycastHit _hit;
         //if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
         //{

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
+    public AudioClip laserSound;
+    private AudioSource source;
     LineRenderer line;
     Light lux;
     public playerWeapon weapon;
     // Start is called before the first frame update
     void Start()
     {
-
+        source = gameObject.GetComponentInParent<AudioSource>();
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = false;
         lux = gameObject.GetComponent<Light>();
@@ -23,7 +25,7 @@ public class LaserScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-
+            source.PlayOneShot(laserSound);
             StopCoroutine(FireLaser());
             StartCoroutine(FireLaser());
             StartCoroutine(laser());
@@ -67,6 +69,7 @@ public class LaserScript : MonoBehaviour
 
     IEnumerator laser()
     {
+        
         GameObject laserShoot = Instantiate(weapon.amnunitionGO, gameObject.transform.position, gameObject.transform.rotation);
         laserShoot.GetComponent<Rigidbody>().AddForce(transform.forward * weapon.bulletSpeed);
         yield return null;

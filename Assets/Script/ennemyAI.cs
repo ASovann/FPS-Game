@@ -85,9 +85,7 @@ public class ennemyAI : MonoBehaviour
                 //ennemi proche a portée
                 if (Distance < attackRange)
                 {
-
                     attack();
-                    
                 }
 
                 //joueur échappé
