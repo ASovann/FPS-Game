@@ -88,7 +88,6 @@ public class ennemyAI : MonoBehaviour
 
                     attack();
                     
-
                 }
 
                 //joueur échappé
@@ -167,9 +166,9 @@ public class ennemyAI : MonoBehaviour
     }
     public void Dead()
     {
-        agent.destination = transform.position;
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+
         isDead = true;
+        Destroy(gameObject);
         
     } 
   

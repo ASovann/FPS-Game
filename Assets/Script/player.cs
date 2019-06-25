@@ -5,11 +5,11 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth = 100;
+    private float maxHealth = 100;
 
-    public int currentHealth;
+    public float currentHealth;
 
-    public void TakeDamage(int _amount)
+    public void TakeDamage(float _amount)
     {
         currentHealth -= _amount;
         Debug.Log("you take: " + _amount);

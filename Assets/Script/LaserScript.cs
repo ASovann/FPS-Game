@@ -24,17 +24,18 @@ public class LaserScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
 
-            //StopCoroutine(FireLaser());
-            //StartCoroutine(FireLaser());
+            StopCoroutine(FireLaser());
+            StartCoroutine(FireLaser());
             StartCoroutine(laser());
-
-
+            
         }
+
+
     }
 
     IEnumerator FireLaser()
     {
-        line.enabled = true;
+        //line.enabled = true;
         lux.enabled = true;
          
         while(Input.GetButton("Fire1"))
@@ -60,7 +61,7 @@ public class LaserScript : MonoBehaviour
 
             yield return null;
         }
-        line.enabled = false;
+        //line.enabled = false;
         lux.enabled = false;
     }
 
