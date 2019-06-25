@@ -5,9 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(playerMotor))]
 public class playerController : MonoBehaviour
 {
-    public float playerHealth;
-    public float playerEnergy;
-
     [SerializeField]
     private float speed = 5f;
     [SerializeField]
