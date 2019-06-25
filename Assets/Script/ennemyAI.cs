@@ -35,7 +35,9 @@ public class ennemyAI : MonoBehaviour
 
     //agent de navigation
     private UnityEngine.AI.NavMeshAgent agent;
-    
+
+    private AudioSource source;
+    public AudioClip laserSound;
 
     //vie
     private float maxEnemyHealth;
@@ -50,6 +52,7 @@ public class ennemyAI : MonoBehaviour
         attackRepeatTime = attackTime;
         basePosition = transform.position;
         maxEnemyHealth = ennemyHealth;
+        source = GetComponent<AudioSource>();
 
     }
 
@@ -116,6 +119,7 @@ public class ennemyAI : MonoBehaviour
             case 0:
 
                 //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
+                source.PlayOneShot(laserSound);
                 StartCoroutine(AttackAnimation());
                 nbrAttack++;
                 break;
@@ -123,6 +127,7 @@ public class ennemyAI : MonoBehaviour
                 attackRepeatTime -= Time.deltaTime;
                 if (attackRepeatTime <= 0)
                 {
+                    source.PlayOneShot(laserSound);
                     StartCoroutine(AttackAnimation());
                     //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
                     attackRepeatTime = attackTime;

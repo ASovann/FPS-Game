@@ -31,7 +31,6 @@ public class collision : MonoBehaviour
         {
             if (col.gameObject.tag != "Enemy")
             {
-                print(3);
                 Destroy(gameObject);
             }
         }
