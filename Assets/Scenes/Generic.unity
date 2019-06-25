@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 1420909983}
   - component: {fileID: 1420909984}
   - component: {fileID: 1420909985}
+  - component: {fileID: 1420909986}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1042,7 +1043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420909982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.01471, y: -904, z: 1.121117}
+  m_LocalPosition: {x: 19, y: -671, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2077347404}
@@ -1069,7 +1070,7 @@ Animator:
   m_GameObject: {fileID: 1420909982}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d12c00e575513d44c81dc709555c65f7, type: 2}
+  m_Controller: {fileID: 9100000, guid: a354d12558c91374eb33cfb53ed575ff, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1090,6 +1091,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0440e9fab240992468337ac8def8cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1420909986
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420909982}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2d3c049724064944482ae27a48a93b50, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.537
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1426416065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,11 +1257,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Aur\xE9lie LECERF\nBrandon \nArthur LACOMBE\nQuentin METON\n\nArthur LACOMBE\nQuentin
-    METON\n\nArthur LACOMBE\n\nQuentin METON\n\nSmall Cave\nNature Starter Kit\nA
-    Steel Oxidised Bracer\nFree Island pack\nFree Speed Tree\nInventory Manager\nGrass
-    Flower\nGolem\nKTK EFFECTS\nMedieval effects\nSeven swords\nSand texture\nPavement
-    Texture\nRPF uniframe\n\n"
+  m_Text: "Aur\xE9lie LECERF\nBrandon GUENOUX\nArthur LACOMBE\nQuentin METON\n\nArthur
+    LACOMBE\nQuentin METON\nAur\xE9lie LECERF\n\nArthur LACOMBE\nBrandon GUENOUX\n\nQuentin
+    METON\n\nArthur LACOMBE\n\nVolumetricLines\nStandard Assets\n\nStar Wars A New
+    Hope\nAvengers It Is Not True\nGhostbusters\n\n\n"
 --- !u!222 &1426416068
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1455,8 +1551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -122.1647, y: 120.017815}
-  m_SizeDelta: {x: 206.3, y: 359}
+  m_AnchoredPosition: {x: -122.1647, y: -31.3}
+  m_SizeDelta: {x: 206.3, y: 661.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077347405
 MonoBehaviour:
@@ -1495,17 +1591,28 @@ MonoBehaviour:
 
 
 
+
+
     Programmer
+
 
 
 
     Animator
 
 
+
     Map Designer
 
 
-    Pack Used'
+    Sound Engineer
+
+
+    Pack Used
+
+
+
+    Sound Used'
 --- !u!222 &2077347406
 CanvasRenderer:
   m_ObjectHideFlags: 0

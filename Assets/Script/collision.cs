@@ -13,18 +13,21 @@ public class collision : MonoBehaviour
         {
             
             Debug.Log("you take damage");
-            Destroy(gameObject);
             
             float damage = _enemy.GetComponent<ennemyAI>().weapon.damage;
             _player.GetComponent<player>().TakeDamage(damage);
-            
+
+            Destroy(gameObject);
+
 
         }
         if(col.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
             float damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
             _enemy.GetComponent<ennemyAI>().ApplyDamage(damage);
+
+            Destroy(gameObject);
+
         }
         
         if(col.gameObject.tag != "Player" )
