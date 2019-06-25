@@ -8,8 +8,8 @@ public class ennemyAI : MonoBehaviour
 
     //Distance entre le joueur et l'ennemi
     private float Distance;
-    
-    
+    public playerWeapon weapon;
+    public GameObject raycast;
 
     //Distance entre la position de base et l'ennemi
     private float DistanceBase;
@@ -60,39 +60,42 @@ public class ennemyAI : MonoBehaviour
         {
             //recherche du joueur
 
-
-            //calcul de la distance joueur ennemi 
-            Distance = Vector3.Distance(Target.position, transform.position);
-
-            //calcul de la distance base ennemi 
-            DistanceBase = Vector3.Distance(basePosition, transform.position);
-
-            //ennemi éloigné
-            if (Distance > chaseRange && DistanceBase <= 1)
+            if (Target != null)
             {
-                idle();
+                //calcul de la distance joueur ennemi 
+                Distance = Vector3.Distance(Target.position, transform.position);
 
-            }
+                //calcul de la distance base ennemi 
+                DistanceBase = Vector3.Distance(basePosition, transform.position);
 
-            //ennemi proche mais pas a portée 
-            if (Distance < chaseRange && Distance > attackRange)
-            {
-                chase();
+                //ennemi éloigné
+                if (Distance > chaseRange && DistanceBase <= 1)
+                {
+                    idle();
 
-            }
+                }
 
-            //ennemi proche a portée
-            if (Distance < attackRange)
-            {
-                
-                attack();
+                //ennemi proche mais pas a portée 
+                if (Distance < chaseRange && Distance > attackRange)
+                {
+                    chase();
 
-            }
+                }
 
-            //joueur échappé
-            if (Distance > chaseRange && DistanceBase > 1 )
-            {
-                BackBase();
+                //ennemi proche a portée
+                if (Distance < attackRange)
+                {
+
+                    attack();
+                    
+
+                }
+
+                //joueur échappé
+                if (Distance > chaseRange && DistanceBase > 1)
+                {
+                    BackBase();
+                }
             }
         }
         
@@ -110,17 +113,20 @@ public class ennemyAI : MonoBehaviour
     {
         //ne traverse pas le joueur
         agent.destination = transform.position;
+        transform.LookAt(Target);
         switch (nbrAttack)
         {
             case 0:
-                
+
                 //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
+                StartCoroutine(AttackAnimation());
                 nbrAttack++;
                 break;
             default:
                 attackRepeatTime -= Time.deltaTime;
                 if (attackRepeatTime <= 0)
                 {
+                    StartCoroutine(AttackAnimation());
                     //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
                     attackRepeatTime = attackTime;
                     nbrAttack++;
@@ -167,5 +173,12 @@ public class ennemyAI : MonoBehaviour
         
     } 
   
+    IEnumerator AttackAnimation()
+    {
+        GameObject laser = Instantiate(weapon.amnunitionGO, raycast.transform.position, raycast.transform.rotation);
+        laser.GetComponent<Rigidbody>().AddForce(transform.forward * weapon.bulletSpeed);
+
+        yield return null;
+    }
 
 }

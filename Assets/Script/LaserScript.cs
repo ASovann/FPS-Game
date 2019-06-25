@@ -6,9 +6,11 @@ public class LaserScript : MonoBehaviour
 {
     LineRenderer line;
     Light lux;
+    public playerWeapon weapon;
     // Start is called before the first frame update
     void Start()
     {
+
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = false;
         lux = gameObject.GetComponent<Light>();
@@ -22,8 +24,11 @@ public class LaserScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
 
-            StopCoroutine(FireLaser());
-            StartCoroutine(FireLaser());
+            //StopCoroutine(FireLaser());
+            //StartCoroutine(FireLaser());
+            StartCoroutine(laser());
+
+
         }
     }
 
@@ -57,5 +62,13 @@ public class LaserScript : MonoBehaviour
         }
         line.enabled = false;
         lux.enabled = false;
+    }
+
+    IEnumerator laser()
+    {
+        GameObject laserShoot = Instantiate(weapon.amnunitionGO, gameObject.transform.position, gameObject.transform.rotation);
+        laserShoot.GetComponent<Rigidbody>().AddForce(transform.forward * weapon.bulletSpeed);
+        yield return null;
+
     }
 }
