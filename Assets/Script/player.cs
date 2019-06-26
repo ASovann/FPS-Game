@@ -7,13 +7,24 @@ public class player : MonoBehaviour
 {
     [SerializeField]
     private float maxHealth = 100;
-
+  
     public float currentHealth;
     public Vector3 originPos;
 
+    public float GetHealthPercent()
+    {
+        return (float)currentHealth / maxHealth;
+    }
     public void TakeDamage(float _amount)
     {
-        currentHealth -= _amount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+        else
+        {
+            currentHealth -= _amount;
+        }
         Debug.Log("you take: " + _amount);
     }
     void Start()

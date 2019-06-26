@@ -8,7 +8,8 @@ public class playerWeapon
     public float damage = 10f;
     public float range = 100f;
     public GameObject amnunitionGO;
-    public float energyCost;
     public float bulletSpeed;
-    public int nbrAmnunition;
+    public int nbrAmnunition = 30;
+    public int nbrAmmunitionMagazine = 30;
+
 }
