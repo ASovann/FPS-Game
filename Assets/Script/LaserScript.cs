@@ -35,7 +35,7 @@ public class LaserScript : MonoBehaviour
             StartCoroutine(laser());
             
         }
-        if(weapon.nbrAmnunition <= 0 && nbrMagazine >= 0)
+        if(weapon.nbrAmnunition <= 0 && nbrMagazine > 0)
         {
             weapon.nbrAmnunition = weapon.nbrAmmunitionMagazine;
             source.PlayOneShot(reloadingSound);

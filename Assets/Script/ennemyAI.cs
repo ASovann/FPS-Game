@@ -43,7 +43,10 @@ public class ennemyAI : MonoBehaviour
     private float maxEnemyHealth;
     public float ennemyHealth;
     public bool isDead = false;
+    public Animator Anim;
     
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +108,7 @@ public class ennemyAI : MonoBehaviour
     //poursuite
     void chase()
     {
+        Anim.SetTrigger("Aiming");
         agent.destination = Target.position;
     }
 
@@ -117,13 +121,14 @@ public class ennemyAI : MonoBehaviour
         switch (nbrAttack)
         {
             case 0:
-
+                Anim.SetTrigger("Attack");
                 //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
                 source.PlayOneShot(laserSound);
                 StartCoroutine(AttackAnimation());
                 nbrAttack++;
                 break;
             default:
+                Anim.SetTrigger("Attack");
                 attackRepeatTime -= Time.deltaTime;
                 if (attackRepeatTime <= 0)
                 {
@@ -150,6 +155,7 @@ public class ennemyAI : MonoBehaviour
     {
         if (!isDead)
         {
+
             ennemyHealth = ennemyHealth - TheDamage;
 
             print(gameObject.name + "à subit " + TheDamage + " points de dégats");
@@ -169,7 +175,6 @@ public class ennemyAI : MonoBehaviour
     }
     public void Dead()
     {
-
         isDead = true;
         Destroy(gameObject);
         
