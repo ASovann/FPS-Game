@@ -6,6 +6,7 @@ public class collision : MonoBehaviour
 {
     private GameObject _player;
     private GameObject _enemy;
+    private float damage;
     
     void OnCollisionEnter(Collision col)
     {
@@ -14,7 +15,15 @@ public class collision : MonoBehaviour
             
             Debug.Log("you take damage");
             
-            float damage = _enemy.GetComponent<ennemyAI>().weapon.damage;
+            if(_enemy)
+            {
+                damage = _enemy.GetComponent<ennemyAI>().weapon.damage;
+            }
+            else
+            {
+                damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
+            }
+            
             _player.GetComponent<player>().TakeDamage(damage);
 
             Destroy(gameObject);
@@ -23,7 +32,8 @@ public class collision : MonoBehaviour
         }
         if(col.gameObject.tag == "Enemy")
         {
-            float damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
+
+            damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
             _enemy.GetComponent<ennemyAI>().ApplyDamage(damage);
 
             Destroy(gameObject);

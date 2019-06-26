@@ -7,8 +7,11 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField]
     private RectTransform HealthBarFill;
+    [SerializeField]
+    private RectTransform EnergyBarFill;
 
     private LaserScript weapon;
+    private abilities ability;
 
     [SerializeField]
     private Text nbrAmmunition;
@@ -29,6 +32,7 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         setHealthAmount(player.GetHealthPercent());
+        setEnergyAmount(player.GetEnergyPercent());
         setAmmoAmount(weapon.weapon.nbrAmnunition);
         setMagazineAmount(weapon.nbrMagazine);
     }
@@ -38,6 +42,10 @@ public class PlayerUI : MonoBehaviour
     public void setHealthAmount(float _amount)
     {
         HealthBarFill.localScale = new Vector3(1f, _amount, 1f);
+    }
+    public void setEnergyAmount(float _amount)
+    {
+        EnergyBarFill.localScale = new Vector3(1f, _amount, 1f);
     }
     
     public void setAmmoAmount(int _amount)

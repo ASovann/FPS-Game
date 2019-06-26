@@ -5,11 +5,13 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
     public AudioClip laserSound;
+    public AudioClip reloadingSound;
     private AudioSource source;
     LineRenderer line;
     Light lux;
     public playerWeapon weapon;
     public int nbrMagazine = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class LaserScript : MonoBehaviour
         if(weapon.nbrAmnunition <= 0 && nbrMagazine >= 0)
         {
             weapon.nbrAmnunition = weapon.nbrAmmunitionMagazine;
+            source.PlayOneShot(reloadingSound);
+
             --nbrMagazine;
         }
 
