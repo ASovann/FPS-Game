@@ -21,14 +21,8 @@ public class collision : MonoBehaviour
             
             Debug.Log("you take damage");
             
-            if(_enemy)
-            {
-                damage = _enemy.GetComponent<ennemyAI>().weapon.damage;
-            }
-            else
-            {
-                damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
-            }
+            damage = _enemy.GetComponent<ennemyAI>().weapon.damage;
+           
             
             _player.GetComponent<player>().TakeDamage(damage);
 
@@ -39,9 +33,12 @@ public class collision : MonoBehaviour
         if(col.gameObject.tag == "Enemy")
         {
             Instantiate(sparks, pos, rot);
-            Instantiate(impactBullet, pos, rot);
-            damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
-            _enemy.GetComponent<ennemyAI>().ApplyDamage(damage);
+            if(col.gameObject)
+            {
+                damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
+
+                col.gameObject.GetComponent<ennemyAI>().ApplyDamage(damage);
+            }
 
             Destroy(gameObject);
 
