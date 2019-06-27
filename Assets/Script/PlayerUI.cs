@@ -9,6 +9,14 @@ public class PlayerUI : MonoBehaviour
     private RectTransform HealthBarFill;
     [SerializeField]
     private RectTransform EnergyBarFill;
+    [SerializeField]
+    private Text textTime;
+    [SerializeField]
+    private InputField cheatcode;
+    [SerializeField]
+    private GameObject cheat;
+    [SerializeField]
+    private Text textCheatCode;
 
     private LaserScript weapon;
     private abilities ability;
@@ -21,6 +29,15 @@ public class PlayerUI : MonoBehaviour
 
     private player player;
 
+    private bool isCheating = false;
+
+    private string codeEntered;
+    private bool codeExec = false;
+
+
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +48,46 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textTime.text = Time.time.ToString();
         setHealthAmount(player.GetHealthPercent());
         setEnergyAmount(player.GetEnergyPercent());
         setAmmoAmount(weapon.weapon.nbrAmnunition);
         setMagazineAmount(weapon.nbrMagazine);
+        
+        
+        switch(isCheating)
+        {
+            case false:
+                if (Input.GetButtonDown("Submit"))
+                {
+                    Time.timeScale = 0f;
+                    isCheating = true;
+                    cheat.SetActive(true);
+                    cheatcode.ActivateInputField();
+
+                }
+                break;
+            case true:
+                if (Input.GetButtonDown("Submit"))
+                {
+                    codeEntered = cheatcode.text;
+                    Time.timeScale = 1f;
+                    isCheating = false;
+                    cheat.SetActive(false);
+                }
+                break;
+        }
+
+        if(codeEntered == "iamanoob")
+        {
+            textCheatCode.text = "Cheat Code Activated";
+            Destroy(textCheatCode, 1);
+            codeExec = true;
+        }
+        if(codeExec)
+        {
+            player.currentHealth = 100;
+        }
     }
     
     
