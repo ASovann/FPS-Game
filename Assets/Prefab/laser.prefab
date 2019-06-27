@@ -128,6 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1fd3df90b287a34aa5cdda45908ae83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparks: {fileID: 160447382193438503, guid: 3c0a3d6d122673744ac1bd1f1fb2a000, type: 3}
+  impactBullet: {fileID: 8314964411557213884, guid: 32925af564d26854caba9fbbcaae5259,
+    type: 3}
 --- !u!65 &2813975227584670088
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class collision : MonoBehaviour
 {
+    public Transform sparks;
+    public Transform impactBullet;
     private GameObject _player;
     private GameObject _enemy;
     private float damage;
     
     void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag == "Player")
+        ContactPoint contact = col.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point;
+        
+        if (col.gameObject.tag == "Player")
         {
             
             Debug.Log("you take damage");
@@ -32,7 +38,8 @@ public class collision : MonoBehaviour
         }
         if(col.gameObject.tag == "Enemy")
         {
-
+            Instantiate(sparks, pos, rot);
+            Instantiate(impactBullet, pos, rot);
             damage = _player.GetComponentInChildren<LaserScript>().weapon.damage;
             _enemy.GetComponent<ennemyAI>().ApplyDamage(damage);
 
@@ -44,6 +51,8 @@ public class collision : MonoBehaviour
         {
             if (col.gameObject.tag != "Enemy")
             {
+                Instantiate(sparks, pos, rot);
+                Instantiate(impactBullet, pos, rot);
                 Destroy(gameObject);
             }
         }

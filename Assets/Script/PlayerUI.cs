@@ -29,7 +29,7 @@ public class PlayerUI : MonoBehaviour
 
     private player player;
 
-    private bool isCheating = false;
+    public bool isCheating = false;
 
     private string codeEntered;
     private bool codeExec = false;

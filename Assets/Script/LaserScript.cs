@@ -11,11 +11,13 @@ public class LaserScript : MonoBehaviour
     Light lux;
     public playerWeapon weapon;
     public int nbrMagazine = 0;
+    public GameObject UI;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        UI = GameObject.Find("PlayerUI");
         source = gameObject.GetComponentInParent<AudioSource>();
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = false;
@@ -27,7 +29,7 @@ public class LaserScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && weapon.nbrAmnunition >= 1)
+        if (Input.GetButtonDown("Fire1") && weapon.nbrAmnunition >= 1 && !UI.GetComponent<PlayerUI>().isCheating)
         {
             source.PlayOneShot(laserSound);
             StopCoroutine(FireLaser());
@@ -81,7 +83,7 @@ public class LaserScript : MonoBehaviour
     IEnumerator laser()
     {
         
-        GameObject laserShoot = Instantiate(weapon.amnunitionGO, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject laserShoot = Instantiate(weapon.amnunitionGO, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), gameObject.transform.rotation);
         laserShoot.GetComponent<Rigidbody>().AddForce(transform.forward * weapon.bulletSpeed);
         weapon.nbrAmnunition -= 1;
         yield return null;

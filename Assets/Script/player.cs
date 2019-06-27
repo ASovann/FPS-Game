@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
+    private AudioSource source;
+    [SerializeField]
+    private AudioClip hurtSound;
     public float maxHealth = 100;
     public float maxEnergy = 100;
+
 
     private float resetEnergyTime;
     public float EnergyTIme;
@@ -25,6 +29,7 @@ public class player : MonoBehaviour
     }
     public void TakeDamage(float _amount)
     {
+        source.PlayOneShot(hurtSound);
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -41,6 +46,7 @@ public class player : MonoBehaviour
     }
     void Start()
     {
+        source = gameObject.GetComponent<AudioSource>();
         originPos = gameObject.transform.position;
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
