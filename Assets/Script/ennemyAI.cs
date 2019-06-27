@@ -38,10 +38,16 @@ public class ennemyAI : MonoBehaviour
 
     private AudioSource source;
     public AudioClip laserSound;
+    public AudioClip explosion;
 
     //vie
     public float ennemyHealth;
     public bool isDead = false;
+
+    public float despawnTime;
+
+    [SerializeField]
+    private GameObject effectExplosion;
     
 
 
@@ -49,6 +55,7 @@ public class ennemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
         attackRepeatTime = attackTime;
         basePosition = transform.position;
@@ -173,10 +180,12 @@ public class ennemyAI : MonoBehaviour
     }
     public void Dead()
     {
-        
+        source.PlayOneShot(explosion);
+        GameObject effect = Instantiate(effectExplosion, gameObject.transform.position, gameObject.transform.rotation);
+        effect.GetComponent<ParticleSystem>().Play();
         isDead = true;
         
-        Destroy(gameObject);
+        Destroy(gameObject, despawnTime);
         
     } 
   
