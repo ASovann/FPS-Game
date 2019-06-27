@@ -40,10 +40,8 @@ public class ennemyAI : MonoBehaviour
     public AudioClip laserSound;
 
     //vie
-    private float maxEnemyHealth;
     public float ennemyHealth;
     public bool isDead = false;
-    public Animator Anim;
     
 
 
@@ -54,7 +52,6 @@ public class ennemyAI : MonoBehaviour
         agent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();
         attackRepeatTime = attackTime;
         basePosition = transform.position;
-        maxEnemyHealth = ennemyHealth;
         source = GetComponent<AudioSource>();
 
     }
@@ -100,6 +97,10 @@ public class ennemyAI : MonoBehaviour
                     BackBase();
                 }
             }
+            if (ennemyHealth <= 0)
+            {
+                Dead();
+            }
         }
         
 
@@ -108,7 +109,7 @@ public class ennemyAI : MonoBehaviour
     //poursuite
     void chase()
     {
-        Anim.SetTrigger("Aiming");
+        //Anim.SetTrigger("Aiming");
         agent.destination = Target.position;
     }
 
@@ -121,17 +122,18 @@ public class ennemyAI : MonoBehaviour
         switch (nbrAttack)
         {
             case 0:
-                Anim.SetTrigger("Attack");
+                //Anim.SetTrigger("Attack");
                 //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
                 source.PlayOneShot(laserSound);
                 StartCoroutine(AttackAnimation());
                 nbrAttack++;
                 break;
             default:
-                Anim.SetTrigger("Attack");
                 attackRepeatTime -= Time.deltaTime;
                 if (attackRepeatTime <= 0)
                 {
+
+                    //Anim.SetTrigger("Attack");
                     source.PlayOneShot(laserSound);
                     StartCoroutine(AttackAnimation());
                     //Debug.Log("L'ennemi a envoyé " + TheDamage + " points de dégats");
@@ -155,16 +157,12 @@ public class ennemyAI : MonoBehaviour
     {
         if (!isDead)
         {
-
-            ennemyHealth = ennemyHealth - TheDamage;
+            ennemyHealth -= TheDamage;
 
             print(gameObject.name + "à subit " + TheDamage + " points de dégats");
 
             
-            if (ennemyHealth <= 0 && isDead == false)
-            {
-                Dead();
-            }
+            
         }
     }
     public void BackBase()
@@ -175,7 +173,9 @@ public class ennemyAI : MonoBehaviour
     }
     public void Dead()
     {
+        
         isDead = true;
+        
         Destroy(gameObject);
         
     } 

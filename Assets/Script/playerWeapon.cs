@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerWeapon 
 {
     public string gunName = "Laser Gun";
-    public float damage = 10f;
+    public float damage = 10;
     public float range = 100f;
     public GameObject amnunitionGO;
     public float bulletSpeed;
